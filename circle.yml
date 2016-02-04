@@ -13,7 +13,6 @@ dependencies:
     - docker version
     - docker info
 
-
 test:
   override:
     - docker build -t atyenoria/$IMAGE_NAME .

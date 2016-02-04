@@ -1,0 +1,37 @@
+machine:
+  services:
+    - docker
+
+## Customize the test machine
+machine:
+    services:
+        - docker
+    timezone:
+     Asia/Tokyo
+
+    environment:
+        IMAGE_NAME: laravel-app-base
+
+general:
+  build_dir: laravel-app-base
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+
+  override:
+    - if [[ -e ~/docker/image.tar ]]; then docker load -i ~/docker/image.tar; fi
+    - docker info
+    - docker build -t atyenoria/$IMAGE_NAME .
+    - mkdir -p ~/docker; docker save atyenoria/$IMAGE_NAME > ~/docker/image.tar
+
+test:
+  override:
+    - ls
+
+deployment:
+  hub:
+    branch: master
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push atyenoria/$IMAGE_NAME

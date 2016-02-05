@@ -8,6 +8,8 @@ machine:
   environment:
     IMAGE_NAME: laravel-app-base
 
+
+
 dependencies:
   override:
     - git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh

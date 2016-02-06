@@ -12,9 +12,6 @@ machine:
 
 dependencies:
   override:
-    - git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
-    - cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-    - sudo chsh -s $(which zsh)
     - docker version
     - docker info
 

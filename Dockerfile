@@ -133,7 +133,11 @@ COPY ./php-fpm.conf /usr/local/etc/php-fpm.conf
 
 
 RUN useradd laravel -d /laravel
-
 RUN mkdir -p /etc/nginx/adminer/ /etc/nginx/ssl /laravel/.ssh /etc/nginx/sites-available /etc/nginx/sites-enabled
+
+
+RUN useradd front -d /front
+RUN mkdir -p /etc/nginx/adminer/ /etc/nginx/ssl /front/.ssh /etc/nginx/sites-available /etc/nginx/sites-enabled
+
 
 

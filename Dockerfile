@@ -1,6 +1,6 @@
-#docker build -t atyenoria/laravel-app-base .
-#docker build -t atyenoria/laravel-app-base . && docker run -it atyenoria/laravel-app-base zsh
-#docker build -t atyenoria/laravel-app-base . && docker push atyenoria/laravel-app-base
+#docker build -t atyenoria/laravel-base .
+#docker build -t atyenoria/laravel-base . && docker run -it atyenoria/laravel-base zsh
+#docker build -t atyenoria/laravel-base . && docker push atyenoria/laravel-base
 #php7-fpm: https://github.com/docker-library/php/blob/cd075c9d4e53b255b4af6691a7ee10354d7fbb8d/7.0/fpm/Dockerfile
 FROM php:7-fpm
 MAINTAINER atyenoria

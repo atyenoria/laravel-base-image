@@ -6,14 +6,14 @@ machine:
   services:
     - docker
   environment:
-    IMAGE_NAME: laravel-app-base
+    IMAGE_NAME: laravel-base
 
 
 
 dependencies:
   override:
     - docker version
-    - docker info
+    # - docker info
 
 
 test:

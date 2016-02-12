@@ -10,7 +10,7 @@ machine:
 
 test:
   override:
-    - docker build -t atyenoria/$IMAGE_NAME .
+    -ga docker build -t atyenoria/$IMAGE_NAME .
 
 
 deployment:

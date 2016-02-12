@@ -8,6 +8,7 @@ filetype plugin indent on
 
 set nocompatible
 
+
 set modelines=0
 colo torte
 "let g:molokai_original = 1

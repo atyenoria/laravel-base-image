@@ -43,7 +43,7 @@ RUN apt-get install -y zsh git
 RUN git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh \
     && cp -R /root/.oh-my-zsh /laravel
     && chsh -s /bin/zsh \
-    && sudo chsh -s /bin/zsh laravel
+    && chsh -s /bin/zsh laravel
 
 #vim plugin
 RUN apt-get install -y vim

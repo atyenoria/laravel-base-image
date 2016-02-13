@@ -32,12 +32,18 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 
 
 
+#laravel setting
+RUN useradd laravel -d /laravel
+RUN mkdir -p /laravel/.ssh
+
 #zsh
 ENV ZSH_DEP_PACKAGE  "software-properties-common build-essential"
 RUN apt-get update && apt-get install -y $ZSH_DEP_PACKAGE
 RUN apt-get install -y zsh git
-RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh \
-    && chsh -s /bin/zsh
+RUN git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh \
+    && cp -R /root/.oh-my-zsh /laravel
+    && chsh -s /bin/zsh \
+    && sudo chsh -s /bin/zsh laravel
 
 #vim plugin
 RUN apt-get install -y vim
@@ -84,9 +90,5 @@ RUN apt-get remove --purge -y software-properties-common && \
     rm -rf /usr/share/man/?? && \
     rm -rf /usr/share/man/??_*
 
-
-#laravel setting
-RUN useradd laravel -d /laravel
-RUN mkdir -p /laravel/.ssh
 
 

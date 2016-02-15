@@ -90,5 +90,6 @@ RUN apt-get remove --purge -y software-properties-common && \
     rm -rf /usr/share/man/?? && \
     rm -rf /usr/share/man/??_*
 
+RUN ln -sf /usr/share/zoneinfo/Japan /etc/localtime
 
 

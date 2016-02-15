@@ -1,6 +1,6 @@
 default:
 	docker build -t atyenoria/laravel-base . & docker run -it atyenoria/laravel-base zsh
-shell:
+s:
 	docker run -it atyenoria/laravel-base zsh
-build:
+b:
 	docker build -t atyenoria/laravel-base .

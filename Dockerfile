@@ -68,7 +68,7 @@ ADD .vimrc /root/.vimrc
 
 
 # Install software requirements
-ENV EXT_PACKAGES "wget curl lsof sudo"
+ENV EXT_PACKAGES "wget curl lsof sudo supervisor"
 RUN apt-get update && \
     apt-get -y install $EXT_PACKAGES && \
     apt-get autoremove -y && \

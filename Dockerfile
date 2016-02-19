@@ -68,7 +68,7 @@ ADD .vimrc /root/.vimrc
 
 
 # Install software requirements
-ENV EXT_PACKAGES "wget curl lsof sudo supervisor"
+ENV EXT_PACKAGES "wget curl lsof sudo supervisor dnsutils"
 RUN apt-get update && \
     apt-get -y install $EXT_PACKAGES && \
     apt-get autoremove -y && \

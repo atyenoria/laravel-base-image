@@ -11,6 +11,37 @@ RUN apt-get update && apt-get install -y $PHP_DEP_PACKAGE \
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 
+#xdebug
+RUN touch /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.remote_enable=1 >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.remote_autostart=0 >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.remote_connect_back=1 >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.remote_port=9000 >> /usr/local/etc/php/conf.d/xdebug.ini; \
+    echo xdebug.remote_log=/tmp/php5-xdebug.log >> /usr/local/etc/php/conf.d/xdebug.ini;
+
+
+RUN mkdir ~/software && \
+    cd  ~/software/ && \
+    apt-get install -y wget && \
+    wget http://xdebug.org/files/xdebug-2.4.0beta1.tgz && \
+    tar -xvzf xdebug-2.4.0beta1.tgz && \
+    cd xdebug-2.4.0beta1 && \
+    phpize && \
+    ./configure && \
+    make && \
+    cp modules/xdebug.so /usr/local/lib/php/extensions/no-debug-non-zts-20151012 && \
+    echo "zend_extension = /usr/local/lib/php/extensions/no-debug-non-zts-20151012/xdebug.so" >>  /usr/local/etc/php/php.ini
+
+
+RUN mkdir ~/software2 && \
+    cd  ~/software2/ && \
+    wget http://xdebug.org/files/xdebug-2.4.0beta1.tgz && \
+    tar -xvzf xdebug-2.4.0beta1.tgz && \
+    mv xdebug-2.4.0beta1 /usr/src/php/ext/xdebug && \
+    cd /usr/src/php/ext/ && \
+    docker-php-ext-configure xdebug && \
+    docker-php-ext-install xdebug
+
 
 # composer
 RUN curl -sS https://getcomposer.org/installer | php

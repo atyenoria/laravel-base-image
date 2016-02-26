@@ -70,6 +70,7 @@ ADD .vimrc /root/.vimrc
 
 
 # Install software requirements
+
 ENV EXT_PACKAGES "wget curl lsof sudo supervisor dnsutils jq openssh-server"
 RUN apt-get update && \
     apt-get -y install $EXT_PACKAGES && \
@@ -95,3 +96,4 @@ RUN apt-get remove --purge -y software-properties-common && \
 RUN ln -sf /usr/share/zoneinfo/Japan /etc/localtime
 
 
+ENV TERM xterm

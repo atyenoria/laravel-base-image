@@ -36,8 +36,9 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 RUN useradd laravel -d /laravel
 RUN mkdir -p /laravel/.ssh
 
-#zsh
 
+
+#zsh
 RUN ZSH_DEP_PACKAGE="software-properties-common build-essential" && \
     apt-get update && apt-get install -y $ZSH_DEP_PACKAGE
 RUN apt-get install -y zsh git
@@ -60,15 +61,6 @@ RUN git clone https://github.com/atyenoria/vim-pathogen.git ~/.vim.tmp && \
 ADD .vimrc /root/.vimrc
 
 
-# Surpress Upstart errors/warning
-# RUN dpkg-divert --local --rename --add /sbin/initctl
-# RUN ln -sf /bin/true /sbin/initctl
-
-# Let the conatiner know that there is no tty
-# ENV DEBIAN_FRONTEND noninteractive
-
-
-# Install software requirements
 
 
 RUN EXT_PACKAGES="wget curl lsof sudo supervisor dnsutils jq openssh-server unzip zip" && \
@@ -95,5 +87,11 @@ RUN apt-get remove --purge -y software-properties-common && \
 
 RUN ln -sf /usr/share/zoneinfo/Japan /etc/localtime
 
-
 ENV TERM xterm
+
+
+
+RUN wget https://releases.hashicorp.com/consul-template/0.13.0/consul-template_0.13.0_linux_amd64.zip -O consul-template.zip && \
+    unzip consul-template.zip && \
+    mv consul-template /usr/local/bin && \
+    rm consul-template.zip

@@ -1,13 +1,11 @@
-#docker build -t atyenoria/laravel-base .
-#docker build -t atyenoria/laravel-base . && docker run -it atyenoria/laravel-base zsh
 FROM php:7-fpm
 
 # php extension
-ENV PHP_DEP_PACKAGE "libfreetype6-dev libjpeg62-turbo-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libcurl4-openssl-dev libxml2-dev libc-client-dev libkrb5-dev libicu-dev openssl"
-RUN apt-get update && apt-get install -y $PHP_DEP_PACKAGE \
-    && docker-php-ext-install -j$(nproc) iconv mcrypt mbstring mysqli pdo pdo_mysql sockets intl dom curl zip ftp bcmath gettext soap \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install -j$(nproc) gd
+RUN PHP_DEP_PACKAGE="libfreetype6-dev libjpeg62-turbo-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libcurl4-openssl-dev libxml2-dev libc-client-dev libkrb5-dev libicu-dev openssl"  && \
+    apt-get update && apt-get install -y $PHP_DEP_PACKAGE  && \
+    docker-php-ext-install -j$(nproc) iconv mcrypt mbstring mysqli pdo pdo_mysql sockets intl dom curl zip ftp bcmath gettext soap  && \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/  && \
+    docker-php-ext-install -j$(nproc) gd
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 RUN pecl install xdebug-beta && \
@@ -22,13 +20,13 @@ RUN composer self-update
 
 #nginx
 ENV NGINX_VERSION 1.9.11-1~jessie
-RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62 \
-    && echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get install -y ca-certificates nginx=${NGINX_VERSION} gettext-base \
-    && rm -rf /var/lib/apt/lists/*
-RUN ln -sf /dev/stdout /var/log/nginx/access.log \
-    && ln -sf /dev/stderr /var/log/nginx/error.log
+RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62  && \
+    echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list  && \
+    apt-get update && \
+    apt-get install -y ca-certificates nginx=${NGINX_VERSION} gettext-base && \
+    rm -rf /var/lib/apt/lists/*
+RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
+    ln -sf /dev/stderr /var/log/nginx/error.log
 
 
 
@@ -39,13 +37,14 @@ RUN useradd laravel -d /laravel
 RUN mkdir -p /laravel/.ssh
 
 #zsh
-ENV ZSH_DEP_PACKAGE  "software-properties-common build-essential"
-RUN apt-get update && apt-get install -y $ZSH_DEP_PACKAGE
+
+RUN ZSH_DEP_PACKAGE="software-properties-common build-essential" && \
+    apt-get update && apt-get install -y $ZSH_DEP_PACKAGE
 RUN apt-get install -y zsh git
-RUN git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh \
-    && cp -R /root/.oh-my-zsh /laravel \
-    && chsh -s /bin/zsh \
-    && chsh -s /bin/zsh laravel
+RUN git clone git://github.com/robbyrussell/oh-my-zsh.git /root/.oh-my-zsh && \
+    cp -R /root/.oh-my-zsh /laravel && \
+    chsh -s /bin/zsh && \
+    chsh -s /bin/zsh laravel
 
 #vim plugin
 RUN apt-get install -y vim
@@ -71,8 +70,9 @@ ADD .vimrc /root/.vimrc
 
 # Install software requirements
 
-ENV EXT_PACKAGES "wget curl lsof sudo supervisor dnsutils jq openssh-server"
-RUN apt-get update && \
+
+RUN EXT_PACKAGES="wget curl lsof sudo supervisor dnsutils jq openssh-server unzip zip" && \
+    apt-get update && \
     apt-get -y install $EXT_PACKAGES && \
     apt-get autoremove -y && \
     apt-get clean && \

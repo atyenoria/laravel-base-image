@@ -1,5 +1,7 @@
 FROM php:7-fpm
 
+
+
 # php extension
 RUN PHP_DEP_PACKAGE="libfreetype6-dev libjpeg62-turbo-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev libcurl4-openssl-dev libxml2-dev libc-client-dev libkrb5-dev libicu-dev openssl"  && \
     apt-get update && apt-get install -y $PHP_DEP_PACKAGE  && \
@@ -12,10 +14,15 @@ RUN pecl install xdebug-beta && \
     docker-php-ext-enable xdebug
 
 
+
+
+
 # composer
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
 RUN composer self-update
+
+
 
 
 #nginx
@@ -63,7 +70,7 @@ ADD .vimrc /root/.vimrc
 
 
 
-RUN EXT_PACKAGES="wget curl lsof sudo supervisor dnsutils jq openssh-server unzip zip" && \
+RUN EXT_PACKAGES="wget curl lsof sudo supervisor dnsutils jq openssh-server unzip zip cron" && \
     apt-get update && \
     apt-get -y install $EXT_PACKAGES && \
     apt-get autoremove -y && \

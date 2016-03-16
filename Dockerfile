@@ -102,3 +102,9 @@ RUN wget https://releases.hashicorp.com/consul-template/0.13.0/consul-template_0
     unzip consul-template.zip && \
     mv consul-template /usr/local/bin && \
     rm consul-template.zip
+
+
+RUN wget https://github.com/fujiwara/fluent-agent-hydra/releases/download/v0.1.6/fluent-agent-hydra-v0.1.6-linux-amd64.zip && \
+    unzip fluent-agent-hydra-v0.1.6-linux-amd64.zip && \
+    mv fluent-agent-hydra-v0.1.6-linux-amd64 fluent-agent-hydra && \
+    mv fluent-agent-hydra /bin

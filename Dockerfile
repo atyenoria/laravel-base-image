@@ -108,3 +108,7 @@ RUN wget https://github.com/fujiwara/fluent-agent-hydra/releases/download/v0.1.6
     unzip fluent-agent-hydra-v0.1.6-linux-amd64.zip && \
     mv fluent-agent-hydra-v0.1.6-linux-amd64 fluent-agent-hydra && \
     mv fluent-agent-hydra /bin
+
+
+RUN git clone https://github.com/letsencrypt/letsencrypt
+

@@ -110,5 +110,5 @@ RUN wget https://github.com/fujiwara/fluent-agent-hydra/releases/download/v0.1.6
     mv fluent-agent-hydra /bin
 
 
-RUN git clone https://github.com/letsencrypt/letsencrypt
+RUN git clone https://github.com/letsencrypt/letsencrypt /root/letsencrypt
 

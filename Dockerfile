@@ -112,5 +112,7 @@ RUN wget https://github.com/fujiwara/fluent-agent-hydra/releases/download/v0.1.6
 
 RUN git clone https://github.com/letsencrypt/letsencrypt /root/letsencrypt && \
     /root/letsencrypt/letsencrypt-auto --help && \
-    mv /root/letsencrypt/letsencrypt-auto /bin
+    mv /root/letsencrypt/letsencrypt-auto /bin && \
+    mkdir -p /var/www/letsencrypt && \
+    chown laravel /var/www/letsencrypt
 

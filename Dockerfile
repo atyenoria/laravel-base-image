@@ -70,7 +70,7 @@ ADD .vimrc /root/.vimrc
 
 
 
-RUN EXT_PACKAGES="wget curl lsof sudo supervisor dnsutils jq openssh-server unzip zip cron" && \
+RUN EXT_PACKAGES="wget curl lsof sudo supervisor dnsutils jq openssh-server unzip zip cron optipng jpegoptim" && \
     apt-get update && \
     apt-get -y install $EXT_PACKAGES && \
     apt-get autoremove -y && \

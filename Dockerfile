@@ -116,3 +116,7 @@ RUN git clone https://github.com/letsencrypt/letsencrypt /root/letsencrypt && \
     mkdir -p /var/www/letsencrypt && \
     chown laravel /var/www/letsencrypt
 
+
+RUN wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip && \
+    unzip ngrok-stable-linux-amd64.zip && \
+    mv ngrok /bin
